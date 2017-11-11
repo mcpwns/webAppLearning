@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title> JavaScript Project </title>
+	<style>
+		#start {
+			margin-top:20px;
+		}
+		#highLow {
+			display:none;
+		}
+		.icard {
+			padding:10px;
+			border:1px solid #ddd;
+		}
+
+		#cards {
+			margin-top:20px;
+			height:60px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1> High vs Low Game </h1>
+		<div id="message">Rules: Select either high or low for the next card. Guess the value of the next card based on the current card. Place your bet depending on how confident you are about your decision.</div>
+		<div id="start">
+			<button id="btnstart" type="button" onclick="gameStart()" class="btn">Start Game</button>
+		</div>
+		<div id = "cards"></div>
+		<div id="highLow">
+			<button id="btnhigh" type="button" onclick="hilo('high')" class="btn">High</button><br>
+			<button id="btnlow" type="button" onclick="hilo('low')" class="btn">Low</button>
+		</div>
+	</div>
+
+	<script type="">
+		var myDollars = 100;
+		var cards = [];
+		var count = 0;
+		var cardOutput = document.getElementById("cards");
+		var suits = ["spades", "hearts", "clubs", "diams"];
+		var numbers = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
+		var message = document.getElementById('message');
+
+		function gameStart() {
+			message.innerHTML = "Game Started!";
+			document.getElementById('start').style.display='none';
+			document.getElementById('highLow').style.display='block';
+			buildCards();
+			shuffleArray(cards);
+			cardOutput.innerHTML += showCard();
+		}
+
+		function hilo(a) {
+			count++;
+			//calculate winner
+
+			cardOutput.innerHTML += showCard();
+
+		}
+
+		function shuffleArray(array) {
+			for(var i = array.length-1; i > 0; i--) {
+				var holder = Math.floor(Math.random() * (i+1));
+				var temp = array[i];
+				array[i] = array[holder];
+				array[holder] = temp;
+			}
+			return array;
+		}
+
+		function showCard() {
+			var c = cards[count];
+			var bgColour = (c.icon == "H" || c.icon == "D") ? 'red' : 'black';
+ 			return '<span class="icard" style ="color:'+bgColour+'">'+ c.number+' &' + c.suit + ';</span>';
+		}
+
+		function buildCards(){
+			cards = [];
+			for(s in suits) {
+				var suit = suits[s][0].toUpperCase();
+				for (n in numbers) {
+					var card = {
+						suit : suits[s],
+						number : numbers[n],
+						cardValue : parseInt(n) + 2,
+						icon : suit
+					};
+					cards.push(card);
+				}
+			}
+			console.log(cards);
+		}
+	</script>
+</body>
+
+</html>
