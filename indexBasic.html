@@ -8,7 +8,7 @@
 		#start {
 			margin-top:20px;
 		}
-		#highLow, #score {
+		#highLow {
 			display:none;
 		}
 		.icard {
@@ -18,63 +18,7 @@
 
 		#cards {
 			margin-top:20px;
-			height:250px;
-		}
-		.icard {
-			height:200px;
-			width:150px;
-			border:1px solid black;
-			border-radius:14px;
-			background-color:white;
-			position:absolute;
-			display:inline-block;
-		}
-
-		.hearts .suit::after{
-			content: '\2665'
-		}
-		.spades .suit::after{
-			content: '\2660'
-		}
-		.clubs .suit::after{
-			content: '\2663'
-		}
-		.diams .suit::after{
-			content: '\2666'
-		}
-		.spades, .clubs {
-			color:black;
-		}
-
-		.hearts, .diams {
-			color:red;
-		}
-
-		.cardtop{
-			font-size:2em;
-			top:5px;
-			left:5px;
-			position:absolute;
-			line-height:0.7em;
-		}
-		.cardmid{
-			text-align: center;  
-			font-size:6em;
-			position:absolute;
-			top:40px;
-			left:50px;
-		}
-		.cardbottom{
-			font-size:2em;
-			transform: rotate(-180deg);
-			-webkit-transform: rotate(-180deg);
-			-moz-transform: rotate(-180deg);
-			-ms-transform: rotate(-180deg);
-			-o-transform: rotate(-180deg);
-			bottom:5px;
-			right:5px;
-			position:absolute;
-			line-height:0.7em;
+			height:60px;
 		}
 	</style>
 </head>
@@ -86,11 +30,7 @@
 		<div id="start">
 			<button id="btnstart" type="button" onclick="gameStart()" class="btn">Start Game</button>
 		</div>
-		<div id = "score">
-			<div>Total $ <span id="dollars">100</span></div>
-			Bet Amount
-			<input type="number" id="myBet" value="0" min="1" max="100">
-		</div>
+		<div id = "score"></div>
 		<div id = "cards"></div>
 		<div id="highLow">
 			<button id="btnhigh" type="button" onclick="hilo('high')" class="btn">High</button><br>
@@ -102,31 +42,18 @@
 		var myDollars = 100;
 		var cards = [];
 		var count = 0;
-		// var score = 0;
-		// var lives = 3;
+		var score = 0;
+		var lives = 3;
 		var cardOutput = document.getElementById("cards");
 		var suits = ["diams","clubs","hearts","spades"];
 		var numbers = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
 		var message = document.getElementById('message');
 		var scoreOutput = document.getElementById('score');
-		var myDol = document.getElementById('dollars');
-		var myB = document.getElementById('myBet');
-
-		myB.addEventListener("change", function() {
-			if(this.value > myDollars) {
-				this.value = myDollars;
-			}
-			if(this.value < 0) {
-				this.value = 0;
-			}
-			message.innerHTML = "Bet changed to $"+this.value;
-		})
 
 		function gameStart() {
 			message.innerHTML = "Game Started!";
 			document.getElementById('start').style.display='none';
 			document.getElementById('highLow').style.display='block';
-			scoreOutput.style.display='block';
 			buildCards();
 			shuffleArray(cards);
 			cardOutput.innerHTML += showCard();
@@ -161,28 +88,23 @@
 
 			if(win) {
 				message.innerHTML = "You were RIGHT! :)";
-				// score++;
+				score++;
 			} else {
 				message.innerHTML = "You were WRONG! :(";
-				// lives--;
+				lives--;
 
-				// if(lives <1) {
-				// 	endPlay();
-				// }
+				if(lives <1) {
+					endPlay();
+				}
 			}
-
-			if(count > 10) {
-				endPlay();
-			}
-			//scoreOutput.innerHTML = "SCORE: "+score+" LIVES:("+lives+")";
+			scoreOutput.innerHTML = "SCORE: "+score+" LIVES:("+lives+")";
 
 		}
 
 		function endPlay() {
 			document.getElementById('highLow').style.display='none';
 			scoreOutput.style.display="none";
-			// message.innerHTML = "Game over your score was " +score+".";
-			message.innerHTML = "GAME OVER.";
+			message.innerHTML = "Game over your score was " +score+".";
 
 		}
 		function shuffleArray(array) {
@@ -197,8 +119,8 @@
 
 		function showCard() {
 			var c = cards[count];
-			var cardDist = (count > 0) ? count * 80 : 0;
- 			return '<div class="icard '+c.suit+'" style="left:'+cardDist+'px;"> <div class="cardtop suit">'+c.num+'<br></div> <div class="cardmid suit"></div> <div class="cardbottom suit">'+c.num+'<br></div> </div>';
+			var bgColour = (c.icon == "H" || c.icon == "D") ? 'red' : 'black';
+ 			return '<span class="icard" style ="color:'+bgColour+'">'+ c.number+' &' + c.suit + ';</span>';
 		}
 
 		function buildCards(){
@@ -208,7 +130,7 @@
 				for (n in numbers) {
 					var card = {
 						suit : suits[s],
-						num : numbers[n],
+						number : numbers[n],
 						cardValue : parseInt(n) + 2,
 						suitValue : parseInt(s) + 1,
 						icon : suit
