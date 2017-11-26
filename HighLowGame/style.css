@@ -1,0 +1,94 @@
+#start {
+	margin-top:20px;
+	text-align: center;
+}
+#highLow, #score {
+	display:none;
+}
+
+#cards {
+	margin-top:20px;
+	height:250px;
+	margin-left:30px;
+}
+.icard {
+	padding:10px;
+	height:200px;
+	width:150px;
+	border:1px solid black;
+	border-radius:14px;
+	background-color:white;
+	position:absolute;
+	display:inline-block;
+	left:30px;
+}
+
+.hearts .suit::after{
+	content: '\2665'
+}
+.spades .suit::after{
+	content: '\2660'
+}
+.clubs .suit::after{
+	content: '\2663'
+}
+.diams .suit::after{
+	content: '\2666'
+}
+.spades, .clubs {
+	color:black;
+}
+
+.hearts, .diams {
+	color:red;
+}
+
+.cardtop{
+	font-size:2em;
+	top:5px;
+	left:5px;
+	position:absolute;
+	line-height:0.7em;
+}
+.cardmid{
+	text-align: center;  
+	font-size:6em;
+	position:absolute;
+	top:40px;
+	left:50px;
+}
+.cardbottom{
+	font-size:2em;
+	transform: rotate(-180deg);
+	-webkit-transform: rotate(-180deg);
+	-moz-transform: rotate(-180deg);
+	-ms-transform: rotate(-180deg);
+	-o-transform: rotate(-180deg);
+	bottom:5px;
+	right:5px;
+	position:absolute;
+	line-height:0.7em;
+}
+.btn {
+	border-radius:5px;
+	padding:9px 20px;
+	color:white;
+	display:inline-block;
+	text-align:center;
+	tet-shadow:1px 1px #000000;
+}
+#btnstart {
+	background-color:black;
+}
+#btnhigh {
+	background-color:blue;
+}
+#btnlow {
+	background-color:red;
+}
+#dollars{
+	font-size:2.5em;
+}
+#message{
+	text-align:center;
+}

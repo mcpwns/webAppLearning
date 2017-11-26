@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title> JavaScript Project </title>
+	<link rel="stylesheet" href="style.css"?>
+</head>
+
+<body>
+	<div class="container">
+		<h1> High vs Low Game </h1>
+		<div id="message">Rules: Select either high or low for the next card. Guess the value of the next card based on the current card. Place your bet depending on how confident you are about your decision.</div>
+		<div id = "score">
+			<div>Total $ <span id="dollars"></span>
+			Bet Amount
+			<input type="number" id="myBet" value="0" min="1" max="100">
+		</div></div>
+		<div id = "cards"></div>
+		<div id="highLow">
+			<button id="btnhigh" type="button" onclick="hilo('high')" class="btn">High</button><br>
+			<button id="btnlow" type="button" onclick="hilo('low')" class="btn">Low</button>
+		</div>
+		<div id="start">
+			<button id="btnstart" type="button" onclick="gameStart()" class="btn">Start Game</button>
+		</div>
+	</div>
+	<script src="script.js"> </script> 
+</body>
+</html>
