@@ -1,0 +1,15 @@
+/* General CSS */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    overflow-y: scroll; /*anything that overflows vertically will become scroll*/
+    overflow-x: hidden; /*anything that oerflows horizontally will disappear */
+}
+
+p {
+    font-size: 14px;
+}
